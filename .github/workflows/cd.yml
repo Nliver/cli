@@ -94,7 +94,7 @@ jobs:
         if: ${{ matrix.platform.container == 'debian:buster-slim' }}
         run: sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list
 
-      - uses: pkgxdev/setup@v4
+      - uses: pkgxdev/setup@v5
         with:
           +: ${{ matrix.platform.pkgs }}
 
