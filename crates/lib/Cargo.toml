@@ -11,26 +11,26 @@ repository = "https://github.com/pkgxdev/pkgx"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
+tokio = { workspace = true }
+rusqlite = { workspace = true }
+regex = { workspace = true }
+nix = { workspace = true }
+serde = { workspace = true }
 anyhow = "1.0.95"
 dirs-next = "2.0"
 libsemverator = { version = "0.10.1", features = ["serde"] }
-serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.9"
-tokio = { version = "1.43", features = ["full", "rt-multi-thread"] }
 tokio-stream = "0.1"
 strum = "0.28"
 strum_macros = "0.28"
-rusqlite = "0.39.0"
-regex = "1.11.1"
 reqwest = { version = "0.13", features = ["stream", "blocking"] }
 async-compression = { version = "0.4", features = ["tokio", "gzip", "xz"] }
 astral-tokio-tar = "0.6.0"
 tokio-util = { version = "0.7.13", features = ["compat"] }
 futures = "0.3.31"
 lazy_static = "1.5.0"
-nix = { version = "0.31.1", features = ["process"] }
 fs2 = "0.4.3"
 tempfile = "3.16.0"
 
 [target.'cfg(not(target_os = "macos"))'.dependencies]
-rusqlite = { version = "0.38.0", features = ["bundled"] }
+rusqlite = { workspace = true, features = ["bundled"] }
