@@ -8,20 +8,20 @@ edition = "2021"
 repository = "https://github.com/pkgxdev/pkgx"
 
 [dependencies]
-tokio = { version = "1.43", features = ["full", "rt-multi-thread"] }
-rusqlite = "0.38.0"
-regex = "1.11.1"
+tokio = { workspace = true }
+rusqlite = { workspace = true }
+regex = { workspace = true }
+nix = { workspace = true }
+serde = { workspace = true }
 indicatif = "0.18.3"
-nix = { version = "0.31.1", features = ["process"] }
 serde_json = "1.0.135"
-serde = { version = "1.0", features = ["derive"] }
 libpkgx = { version = "0.7.1", path = "../lib" }
 console = { version = "0.16", default-features = false, features = [
   "ansi-parsing",
 ] }
 
 [target.'cfg(not(target_os = "macos"))'.dependencies]
-rusqlite = { version = "0.38.0", features = ["bundled"] }
+rusqlite = { workspace = true, features = ["bundled"] }
 native-tls = { version = "0.2", features = ["vendored"] }
 # ^^ this is a transitive dependency
 # ^^ we vendor OpenSSL ∵ we want to be standalone and just work inside minimal docker images
