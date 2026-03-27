@@ -33,7 +33,16 @@ pub async fn ensure(config: &Config, conn: &mut Connection) -> Result<(), Box<dy
 
 pub async fn update(config: &Config, conn: &mut Connection) -> Result<(), Box<dyn Error>> {
     if std::env::var("PKGX_PANTRY_DIR").is_ok() {
-        return Err("PKGX_PANTRY_DIR is set, refusing to update pantry")?;
+        if config.pantry_dir.join("projects").is_dir() {
+            let lockfile = lock(config)?;
+            pantry_db::cache(config, conn)?;
+            FileExt::unlock(&lockfile)?;
+            return Ok(());
+        } else {
+            return Err(
+                "PKGX_PANTRY_DIR is set but does not contain a pantry (missing projects/)",
+            )?;
+        }
     }
     replace(config, conn).await
 }
